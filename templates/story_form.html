@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-md-3 d-none d-md-block"></div>
     <div class="col col-md-6 m-1 m-auto">
-        <div class="card p-2 m-auto mt-1">
+    <br>
+        <div class="card p-2 m-auto">
           <div class="card-body">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -32,5 +32,4 @@
           </div>
         </div>
     </div>
-    <div class="d-none d-md-block col-md-3"></div>
 {% endblock %}

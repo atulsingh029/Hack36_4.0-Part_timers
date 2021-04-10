@@ -40,12 +40,12 @@ class Story(models.Model):
     datetime = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     storyid = models.CharField(max_length=255, unique=True)
     title = models.CharField(max_length=512, null=False, blank=False)
-    story = models.CharField(max_length=2048, null=False, blank=False)
+    story = models.CharField(max_length=204800, null=False, blank=False)
     writer = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='story')
     voice = models.ManyToManyField(Voice, blank=True)
     status = models.CharField(choices=[('requested', 'requested'), ('accepted', 'accepted'), ('rejected', 'rejected')],
-                              max_length=10, default='requested')
+                              max_length=10, default='accepted')
     visibility = models.CharField(
         choices=[('public', 'public'), ('advance user only', 'advance user only'), ('private', 'private')],
         max_length=20, default='public')
@@ -62,3 +62,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+
+class Help(models.Model):
+    helper = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='helper_account')
+    receiver = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='receiver_account')
+    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    message = models.CharField(max_length=1024)
+    contact_details = models.CharField(max_length=1024)
+
+    def __str__(self):
+        return self.story.title

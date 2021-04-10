@@ -16,8 +16,10 @@
                     <span class="navbar-items text-right">
                         <ul>
                             {% if request.user.is_authenticated %}
+                                <li><a href="/story/post/">Post Your Story</a> </li>
                                 <li><a href="/signout">Sign Out</a> </li>
                             {% else %}
+                                <li><a href="/story/post/">Post Your Story</a> </li>
                                 <li><a href="/signin">Sign In</a> </li>
                                 <li><a href="/signup">Sign Up</a> </li>
                             {% endif %}
@@ -28,7 +30,7 @@
             </div>
         </div>
         <div id="main_content">
-            <div class="container">
+            <div class="container" style="min-height: 100vh">
                 {% block content %}
                 {% endblock %}
             </div>

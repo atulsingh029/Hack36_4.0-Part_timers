@@ -1,5 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <div class="row m-auto">
+        <div class="col-12 m-auto">
+            <H3 class="display-5">To Help Someone Please SignUp!</H3>
+        </div>
+        <div class="col-12 m-auto">
+        <h5 class="card-title">Recent Stories</h5>
+            {% for story in stories %}
+                <div class="card mt-2" style="max-width: 1080px; border-radius: 20px; border: solid white;background-color: white;">
+                {% if story.image %}
+                  <img src="/mediafiles/{{ story.image }}" class="card-img-top" alt="{{ story.title }}">
+                {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title">{{ story.title }}</h5>
+                      {% if story.writer %}
+                      <p class="text-capitalize text-muted">Writer : {{ story.writer.first_name }} {{ story.writer.last_name }} on {{ story.datetime }}</p>
+                      {% else %}
+                          <p class="text-muted">Story By Anonymous User on {{ story.datetime }}</p>
+                      {% endif %}
+                    <p class="card-text">{{ story.story }}</p>
+                    {% if story.writer %}
+                  {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+        <div>
+            {% if stories.has_other_pages %}
+                {% if stories.has_previous %}
+                    <a href="?page=1#stories" class="btn btn-outline-info m-1 btn-sm">First</a>
+                    <a href="?page={{ latest_stories.previous_page_number }}#stories" class="btn btn-outline-info m-1 btn-sm">Previous</a>
+                {% endif %}
+                {% for num in stories.paginator.page_range %}
+                    {% if num == stories.number %}
+                        <a href="?page={{ num }}#stories" class="btn btn-info m-1 btn-sm">{{ num }}</a>
+                        {% elif num > stories.number|add:'-3' and num < stories.number|add:'3' %} <a href="?page={{ num }}#stories"
+                            class="btn btn-outline-info m-1 btn-sm">{{ num }}</a>
+                        {% endif %}
+                {% endfor %}
+                {% if stories.has_next %}
+                    <a href="?page={{ stories.next_page_number }}#stories" class="btn btn-outline-info m-1 btn-sm">Next</a>
+                    <a href="?page={{ stories.paginator.num_pages }}#stories" class="btn btn-outline-info m-1 btn-sm">Last</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        </div>
 {% endblock %}

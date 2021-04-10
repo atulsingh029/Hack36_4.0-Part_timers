@@ -15,3 +15,8 @@ class SignUpForm(forms.Form):
     you_are = forms.ChoiceField(choices=(('volunteer', 'volunteer'), ('victim', 'victim')))
     profession = forms.CharField(max_length=255)
     profile_pic = forms.ImageField(label='Profile Picture', allow_empty_file=True, required=False)
+
+
+class HelpForm(forms.Form):
+    help_message = forms.CharField(max_length=1024, label='Help Message', )
+    contact_details = forms.CharField(max_length=1024, label='Conatct Details', )

@@ -14,23 +14,36 @@
 .navbar {
     background: bisque;
     width: 100%;
-    height: 90px;
-}
-
-.footer {
-    position: absolute;
-    background: bisque;
-    width: 100%;
-    height: 100px;
-    bottom: 0;
+    height: 60px;
 }
 
 .hero {
-    font-size: larger;
     font-weight: bold;
-    border-radius: 50px;
+    border-radius: 40px;
+    line-height: 40px;
 }
 
 .round {
-    border-radius: 25px;
+    border-radius: 20px;
+}
+
+.navbar-items {
+    background-color: bisque;
+    margin-top: 10px;
+}
+
+.navbar-items ul{
+    list-style: none;
+    background-color: bisque;
+    font-size: small;
+}
+
+.navbar-items ul li {
+    display: inline;
+    background-color: bisque;
+}
+
+#alert-icon:hover{
+    background-color: red;
+    color: white;
 }

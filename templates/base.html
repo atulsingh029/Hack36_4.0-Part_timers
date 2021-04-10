@@ -10,8 +10,20 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <nav class="navbar">
-                <span class="hero m-auto p-2"><img src="{% static "/assets/logo.png" %}" height="50px" width="50px" class="round m-auto">The SafeHouse</span>
+                <nav class="navbar p-0 m-0">
+                <div class="container" style="background: bisque">
+                <span class="hero p-1 px-3 pt-2"><img src="{% static "/assets/logo.png" %}" height="40px" width="40px" class="round m-auto">The SafeHouse</span>
+                    <span class="navbar-items text-right">
+                        <ul>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="signout">Sign Out</a> </li>
+                            {% else %}
+                                <li><a href="signin">Sign In</a> </li>
+                                <li><a href="signup">Sign Up</a> </li>
+                            {% endif %}
+                        </ul>
+                    </span>
+                </div>
                 </nav>
             </div>
         </div>

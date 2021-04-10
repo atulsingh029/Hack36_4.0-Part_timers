@@ -1,8 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('/timeline')
     context = {
         'title': 'Home '
     }
@@ -14,7 +15,10 @@ def signup(request):
 
 
 def signin(request):
-    pass
+    if request.user.is_authenticated:
+        return redirect('/timeline')
+    else:
+        return render(request, template_name='login.html')
 
 
 def signout(request):
@@ -22,7 +26,11 @@ def signout(request):
 
 
 def get_timeline(request):
-    pass
+    if request.user.is_authenticated:
+        context ={}
+        return render(request, template_name='dashboard.html', context=context)
+    else:
+        return redirect('/')
 
 
 def post_story(request):

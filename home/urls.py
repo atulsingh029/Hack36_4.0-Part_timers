@@ -10,7 +10,7 @@ urlpatterns = [
     path('story/delete/', delete_story),
     path('story/edit/', edit_story),
     path('story/<str:story_id>/', read_story),
-    path('get_timeline/', get_timeline),
+    path('timeline/', get_timeline),
     path('add/emergency/', add_emergency_contact),
     path('delete/emergency/', delete_emergency_contact),
     path('alert/', alert_trigger),

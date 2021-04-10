@@ -1,4 +1,11 @@
+import random
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from .forms import *
+from django.contrib.auth import authenticate
+from django.contrib.auth import login, logout
+
+from .models import Account, Story
 
 
 def index(request):
@@ -11,30 +18,101 @@ def index(request):
 
 
 def signup(request):
-    pass
+    if request.user.is_authenticated:
+        return redirect('/timeline')
+    else:
+        if request.method == 'POST':
+            data = request.POST
+            email = data.get('email')
+            password1 = data.get('password1')
+            password2 = data.get('password2')
+            user_type = data.get('you_are')
+            profession = data.get('profession')
+            first_name = data.get('first_name')
+            last_name = data.get('last_name')
+            image = request.FILES.get('profile_pic')
+
+            duplicate_check = Account.objects.filter(email=email)
+            if len(duplicate_check) == 0 and password1 == password2:
+                account = Account(username=email, email=email, first_name=first_name, last_name=last_name,
+                                  badge_title=profession, badge=user_type, profile_pic=image)
+                account.set_password(password2)
+                account.save()
+                login(request, account)
+                return redirect('/timeline')
+            else:
+                return redirect('/signup?response=Try_Again&prompt=Something_Went_Wrong')
+        form = SignUpForm()
+        context = {"form": form, "btn_name": "Sign Up", "formname": "Sign Up", "text": "The SafeHouse"
+                   }
+        return render(request, template_name='form.html', context=context)
 
 
 def signin(request):
     if request.user.is_authenticated:
         return redirect('/timeline')
     else:
-        return render(request, template_name='login.html')
+        if request.method == 'POST':
+            data = request.POST
+            username = data.get('email')
+            password = data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user=user)
+                return redirect('/timeline')
+            else:
+                return redirect('/signin?response=No_Such_User&prompt=Correct_Username_Or_Password_And_Try_Again')
+        form = SignInForm()
+        context = {"form": form, "btn_name": "Sign In", "formname": "Sign In", "text": "The SafeHouse"
+                   }
+        return render(request, template_name='form.html', context=context)
 
 
 def signout(request):
-    pass
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('/')
+    return redirect('/')
 
 
 def get_timeline(request):
     if request.user.is_authenticated:
-        context ={}
+        obj = Account.objects.get(username=request.user)
+        if obj.profile_pic =='':
+            img = 'add static default url'
+        else:
+            img =obj.profile_pic.url
+        context = {'profile_pic': img}
         return render(request, template_name='dashboard.html', context=context)
     else:
         return redirect('/')
 
 
 def post_story(request):
-    pass
+    if request.method == 'POST':
+        data = request.POST
+        image = request.FILES
+        title = data.get('title')
+        story = data.get('story')
+        image = image.get('image')
+        if str(image).endswith('.jpg') or str(image).endswith('.png') or str(image).endswith('.jpeg'):
+            pass
+        else:
+            image =''
+        if data.get('post_anonymously'):
+            writer = None
+        elif not request.user.is_authenticated:
+            writer = None
+        else:
+            writer = request.user
+        st = Story(title=title, story=story, image=image, writer=writer, storyid=story[0:5]+str(random.randrange(1000000, 9999999)))
+        st.save()
+        return redirect('/?response=Story_Posted')
+    context = {
+
+        }
+    return render(request, template_name='story_form.html', context=context)
+
 
 
 def delete_story(request):

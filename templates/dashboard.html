@@ -4,13 +4,30 @@
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <p>feed area</p>
+            {% for story in stories %}
+                <div class="story-card">
 
-            </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-            <p>profile area</p>
-            <a href="alert" class="btn btn-outline-danger btn-sm" id="alert-icon"><svg xmlns="http://www.w3.org/2000/svg" style="background: transparent" width="20" height="20" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <div class="profile-box">
+                <div class="row">
+                    <div class="col-4" style="background: white">
+                        <img src="{{ profile_pic }}" class="img-responsive img-thumbnail rounded d-inline">
+                    </div>
+                    <div class="col-8" style="background: white">
+                        <p style="background: white" class="m-1 p-0">{{ user }}</p>
+                        <p style="background: white" class="m-1 p-0">{{ user.first_name }} {{ user.last_name }}</p>
+                    </div>
+                </div>
+
+                <a href="/alert" class="btn btn-outline-danger btn-sm" id="alert-icon"><svg xmlns="http://www.w3.org/2000/svg" style="background: transparent" width="20" height="20" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg> Emergency</a>
+            </div>
         </div>
     </div>
 {% endblock %}

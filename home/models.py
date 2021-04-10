@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 
-class Account(User):
+class Account(AbstractUser):
     sex = models.CharField(max_length=15, choices=(('male', 'male'), ('female', 'female')), null=True, blank=True)
     dob = models.DateField(null=True, blank=True)
     profile_pic = models.ImageField(null=True, blank=True, upload_to='profile_pictures', default='def_user.png')
@@ -37,7 +37,6 @@ class Voice(models.Model):
 
 
 class Story(models.Model):
-    ip = models.GenericIPAddressField()
     datetime = models.DateTimeField(auto_now_add=True, null=False, blank=False)
     storyid = models.CharField(max_length=255, unique=True)
     title = models.CharField(max_length=512, null=False, blank=False)

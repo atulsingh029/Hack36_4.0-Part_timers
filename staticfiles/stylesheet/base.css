@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    background: #fff1e4;
+    font-family: 'Poppins', Roboto, sans-serif;
+}
+
+#main_content{
+    background: #fff1e4;
+}
+
+.navbar {
+    background: bisque;
+    width: 100%;
+    height: 90px;
+}
+
+.footer {
+    position: absolute;
+    background: bisque;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+}
+
+.hero {
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 50px;
+}
+
+.round {
+    border-radius: 25px;
+}

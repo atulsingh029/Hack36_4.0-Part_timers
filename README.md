@@ -5,7 +5,15 @@ live project url : http://hack36.pythonanywhere.com
 Project for Hack36 4.0 MNNIT hackathon by team Part_timers
 
 Project Report - Hack 36 4.0
-SafeHouse (Tentative) under Women’s safety
+SafeHouse  under Women’s safety
+
+Technologies Used:
+Python
+Django
+HTML
+CSS
+Bootstrap
+SQL Database
 
 Introduction:
 Women Safety has l ong been a cause of concern so far as humanity i s concerned. It i s,

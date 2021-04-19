@@ -1,5 +1,5 @@
 # Hack36_2021-Part_timers
-live project url : http://hack36.pythonanywhere.com
+
 
 
 Project for Hack36 4.0 MNNIT hackathon by team Part_timers
